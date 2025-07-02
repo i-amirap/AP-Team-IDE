@@ -331,8 +331,3 @@ window.addEventListener("load", (e) => {
   }
 });
 
-history.pushState(
-  null,
-  "",
-  location.pathname.slice(0, location.pathname.length - 10)
-);
