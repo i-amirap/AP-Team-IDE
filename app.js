@@ -323,11 +323,12 @@ window.addEventListener("offline", () => {
   location.href = "check-connection.html";
 });
 
-// قطع دسترسی موبایل
+// حذف کادر آبی بعد از کلیک روی المنت ها در موبایل
 window.addEventListener("load", (e) => {
   if (navigator.userAgentData.mobile) {
-    alert("استفاده از این وب اپلیکیشن در تلفن همراه امکان پذیر نیست!");
-    window.close();
+    document.querySelectorAll("*").forEach(elem => {
+      elem.style.curser = "pointer";
+    });
   }
 });
 
