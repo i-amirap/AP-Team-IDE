@@ -136,3 +136,9 @@ header {
 #developed-by:hover i {
   transform: translateX(3px);
 }
+
+@media (hover: none) and (pointer: coarse) {
+  *:focus {
+    outline: none;
+  }
+}
