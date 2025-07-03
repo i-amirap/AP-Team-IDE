@@ -99,6 +99,15 @@
         script.src =
           "https://survey.porsline.ir/embed/eyJib3JkZXIiOiJub25lIiwid2lkdGgiOiIxMDAlIiwiaGVpZ2h0IjoiMTAwJSJ9/oEgtMYL";
         document.getElementById("oEgtMYL").appendChild(script);
+
+        // حذف کادر آبی بعد از کلیک روی المنت ها در موبایل
+window.addEventListener("load", (e) => {
+  if (navigator.userAgentData.mobile) {
+    document.querySelectorAll("*").forEach(elem => {
+      elem.style.curser = "pointer";
+    });
+  }
+});
       </script>
     </div>
   </body>
