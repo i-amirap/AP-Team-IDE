@@ -285,6 +285,15 @@
       window.addEventListener("offline", () => {
         location.href = "check-connection.html";
       });
+
+      // حذف کادر آبی بعد از کلیک روی المنت ها در موبایل
+window.addEventListener("load", (e) => {
+  if (navigator.userAgentData.mobile) {
+    document.querySelectorAll("*").forEach(elem => {
+      elem.style.curser = "pointer";
+    });
+  }
+});
       
     </script>
   </body>
