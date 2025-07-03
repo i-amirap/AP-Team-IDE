@@ -327,7 +327,7 @@ window.addEventListener("offline", () => {
 window.addEventListener("load", (e) => {
   if (navigator.userAgentData.mobile) {
     document.querySelectorAll("*").forEach(elem => {
-      elem.style.curser = "pointer";
+      elem.style.curser = "none";
     });
   }
 });
