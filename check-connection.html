@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
   <head>
@@ -95,108 +94,10 @@
         }
       });
 
-
-       // جلوگیری از زوم در safari
-        document.addEventListener("gesturestart", function (e) {
-          e.preventDefault();
-        });
-    </script>
-  </body>
-</html>
-=======
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" href="images/icon-192.png" type="image/x-icon" />
-    <title>بررسی اتصال اینترنت</title>
-    <style>
-      @font-face {
-        font-family: "Vazir";
-        src: url("./styles/fonts/vazir.woff2") format("woff2");
-      }
-
-      * {
-        font-family: "Vazir";
-      }
-
-      body {
-        font-family: sans-serif;
-        text-align: center;
-        background: #1e1e1e;
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        flex-direction: column;
-        overflow: hidden;
-      }
-      .status {
-        font-size: 1.2rem;
-        margin-top: 20px;
-      }
-      .spinner {
-        margin-top: 30px;
-        border: 4px solid #333;
-        border-top: 4px solid #00aaff;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        animation: spin 1s linear infinite;
-      }
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <h1>در حال بررسی اتصال اینترنت...</h1>
-    <div class="status" id="status">لطفاً صبر کنید</div>
-    <div class="spinner"></div>
-
-    <script>
-      async function checkConnection() {
-        if (!navigator.onLine) {
-          return showOffline();
-        }
-
-        try {
-          const res = await fetch("https://www.gstatic.com/generate_204", {
-            method: "HEAD",
-            cache: "no-store",
-            mode: "no-cors",
-          });
-          // به دلیل mode: 'no-cors'، res.ok قابل بررسی نیست، پس فرض می‌گیریم اینترنت وصل است
-          location.href = "index.html";
-        } catch (e) {
-          showOffline();
-        }
-      }
-
-      function showOffline() {
-        document.getElementById("status").textContent =
-          "اتصال برقرار نیست، تلاش مجدد...";
-        setTimeout(checkConnection, 5000);
-      }
-
-      checkConnection();
-
-      // حذف کادر آبی بعد از کلیک روی المنت ها در موبایل
-      window.addEventListener("load", (e) => {
-        if (
-          navigator.userAgentData &&
-          navigator.userAgentData.mobile
-        ) {
-          document.querySelectorAll("*").forEach((elem) => {
-            elem.style.cursor = "none";
-          });
-        }
+      // جلوگیری از زوم در safari
+      document.addEventListener("gesturestart", function (e) {
+        e.preventDefault();
       });
     </script>
   </body>
 </html>
->>>>>>> 03060b9bd27add8562217ea94f5a39f85bc5cad0
