@@ -326,9 +326,38 @@ window.addEventListener("offline", () => {
 // حذف کادر آبی بعد از کلیک روی المنت ها در موبایل
 window.addEventListener("load", (e) => {
   if (navigator.userAgentData.mobile) {
-    document.querySelectorAll("*").forEach(elem => {
+    document.querySelectorAll("*").forEach((elem) => {
       elem.style.curser = "none !important";
     });
   }
 });
 
+
+// نمایش پیغام نصب pwa
+let deferredPrompt;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  // جلوگیری از نمایش پیش‌فرض
+  e.preventDefault();
+  deferredPrompt = e;
+
+  // اگر می‌خوای به صورت خودکار نشون بدی (مثلاً ۳ ثانیه بعد)
+  setTimeout(() => {
+    showInstallPrompt();
+  }, 3000);
+});
+
+function showInstallPrompt() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === "accepted") {
+        console.log("✅ کاربر نصب را تایید کرد");
+      } else {
+        console.log("❌ کاربر نصب را رد کرد");
+      }
+      deferredPrompt = null;
+    });
+  }
+}
