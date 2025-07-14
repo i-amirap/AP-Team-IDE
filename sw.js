@@ -42,7 +42,7 @@ self.addEventListener("fetch", event => {
         fetch(event.request).catch(() => {
           // اگر درخواست HTML بود و اینترنت قطع بود، به صفحه check-connection.html هدایت کن
           if (event.request.headers.get("accept")?.includes("text/html")) {
-            return caches.match("./check-connection.html");
+            return caches.match("/check-connection.html");
           }
         })
       );
