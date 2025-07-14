@@ -116,6 +116,16 @@
         document.addEventListener("gesturestart", function (e) {
           e.preventDefault();
         });
+
+        // بررسی آنلاین بودن
+        window.addEventListener("load", () => {
+          if (!navigator.onLine) {
+            location.href = "check-connection.html";
+          }
+        });
+        window.addEventListener("offline", () => {
+          location.href = "check-connection.html";
+        });
       </script>
     </div>
   </body>
