@@ -1,6 +1,6 @@
 @font-face {
-    font-family: "Vazir";
-    src: url("./fonts/vazir.woff2") format("woff2");
+  font-family: "Vazir";
+  src: url("./fonts/vazir.woff2") format("woff2");
 }
 
 body,
@@ -10,14 +10,17 @@ html {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: "Vazir", sans-serif ;
+  font-family: "Vazir", sans-serif;
   background: #1e1e1e;
   color: white;
 }
 
-button , input , select , option{
-    font-family: "Vazir" !important;
-    outline: none !important;
+button,
+input,
+select,
+option {
+  font-family: "Vazir" !important;
+  outline: none !important;
 }
 
 header {
