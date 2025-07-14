@@ -313,7 +313,6 @@ if ("serviceWorker" in navigator) {
 // بررسی وضعیت اینترنت
 window.addEventListener("load", () => {
   if (!navigator.onLine) {
-    // انتقال به صفحه بررسی اتصال
     location.href = "check-connection.html";
   }
 });
@@ -325,23 +324,20 @@ window.addEventListener("offline", () => {
 
 // حذف کادر آبی بعد از کلیک روی المنت ها در موبایل
 window.addEventListener("load", (e) => {
-  if (navigator.userAgentData.mobile) {
+  if (navigator.userAgentData && navigator.userAgentData.mobile) {
     document.querySelectorAll("*").forEach((elem) => {
-      elem.style.cursor = "none !important";
+      elem.style.cursor = "none";
     });
   }
 });
-
 
 // نمایش پیغام نصب pwa
 let deferredPrompt;
 
 window.addEventListener("beforeinstallprompt", (e) => {
-  // جلوگیری از نمایش پیش‌فرض
   e.preventDefault();
   deferredPrompt = e;
 
-  // اگر می‌خوای به صورت خودکار نشون بدی (مثلاً ۳ ثانیه بعد)
   setTimeout(() => {
     showInstallPrompt();
   }, 3000);
@@ -362,14 +358,15 @@ function showInstallPrompt() {
   }
 }
 
+// ذخیره داده‌ها در زمان آفلاین بودن (pwa notice)
+if ("serviceWorker" in navigator && "SyncManager" in window) {
+  navigator.serviceWorker.ready
+    .then((registration) => {
+      // ذخیره موقت اطلاعات مثلاً در IndexedDB یا localStorage
+      // saveDataOffline(data); // این تابع را خودت باید بسازی
 
-//ذخیره داده ها در زمان آفلاین بودن (pwa notice)
-if ('serviceWorker' in navigator && 'SyncManager' in window) {
-  navigator.serviceWorker.ready.then(registration => {
-    // ذخیره موقت اطلاعات مثلاً در IndexedDB یا localStorage
-    saveDataOffline(data);
-
-    // ثبت یک sync
-    registration.sync.register('sync-data');
-  }).catch(console.error);
+      // ثبت یک sync
+      registration.sync.register("sync-data");
+    })
+    .catch(console.error);
 }
