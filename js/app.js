@@ -300,7 +300,7 @@ window.onload = function () {
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      .register("./pwa/sw.js")
+      .register("sw.js")
       .then((registration) => {
         console.log("ServiceWorker ثبت شد با موفقیت: ", registration.scope);
       })
@@ -327,7 +327,7 @@ window.addEventListener("offline", () => {
 window.addEventListener("load", (e) => {
   if (navigator.userAgentData.mobile) {
     document.querySelectorAll("*").forEach(elem => {
-      elem.style.curser = "none";
+      elem.style.curser = "none !important";
     });
   }
 });
