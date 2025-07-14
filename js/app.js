@@ -288,7 +288,7 @@ if ("serviceWorker" in navigator) {
   });
 }
 
-// بررسی آنلاین بودن
+// // بررسی آنلاین بودن
 // window.addEventListener("load", () => {
 //   if (!navigator.onLine) {
 //     location.href = "check-connection.html";
@@ -298,7 +298,7 @@ if ("serviceWorker" in navigator) {
 //   location.href = "check-connection.html";
 // });
 
-// حذف کادر آبی روی موبایل
+// حذف کادر آبی روی المنت در موبایل
 window.addEventListener("load", () => {
   if (navigator.userAgentData?.mobile) {
     document.querySelectorAll("*").forEach((el) => {
@@ -312,9 +312,11 @@ let deferredPrompt;
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
-  setTimeout(() => {
-    showInstallPrompt();
-  }, 3000);
+  document.addEventListener("click" , () => {
+    setTimeout(() => {
+      showInstallPrompt();
+    }, 2000);
+  })
 });
 function showInstallPrompt() {
   if (deferredPrompt) {
@@ -334,7 +336,7 @@ function showInstallPrompt() {
 if ("serviceWorker" in navigator && "SyncManager" in window) {
   navigator.serviceWorker.ready
     .then((registration) => {
-      // saveDataOffline(data); // اگر لازم داری، فعالش کن
+      // saveDataOffline(data);
       registration.sync.register("sync-data");
     })
     .catch(console.error);
