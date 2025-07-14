@@ -289,14 +289,14 @@ if ("serviceWorker" in navigator) {
 }
 
 // بررسی آنلاین بودن
-window.addEventListener("load", () => {
-  if (!navigator.onLine) {
-    location.href = "check-connection.html";
-  }
-});
-window.addEventListener("offline", () => {
-  location.href = "check-connection.html";
-});
+// window.addEventListener("load", () => {
+//   if (!navigator.onLine) {
+//     location.href = "check-connection.html";
+//   }
+// });
+// window.addEventListener("offline", () => {
+//   location.href = "check-connection.html";
+// });
 
 // حذف کادر آبی روی موبایل
 window.addEventListener("load", () => {
