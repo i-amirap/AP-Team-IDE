@@ -6,14 +6,19 @@
     <link rel="shortcut icon" href="images/icon-192.png" type="image/x-icon" />
     <title>زیلینک من - AmirAP</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <!-- فونت و آیکون -->
+    <link
+      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn-font@v33.003/Vazirmatn-font-face.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
 
     <style>
-      @font-face {
-        font-family: "Vazirmatn";
-        src: url("./styles/fonts/vazir.woff2") format("woff2");
-      }
-      
       * {
         box-sizing: border-box;
         -webkit-user-drag: none;
@@ -180,9 +185,9 @@
       }
 
       @media (hover: none) and (pointer: coarse) {
-  *:focus {
-    outline: none;
-  }
+        *:focus {
+          outline: none;
+        }
       }
     </style>
   </head>
@@ -252,6 +257,7 @@
           const a = document.createElement("a");
           a.href = link.url;
           a.target = "_blank";
+          a.rel = "noopener noreferrer";
           const icon = document.createElement("i");
           icon.className = link.icon;
           const text = document.createElement("span");
@@ -288,14 +294,16 @@
       });
 
       // حذف کادر آبی بعد از کلیک روی المنت ها در موبایل
-window.addEventListener("load", (e) => {
-  if (navigator.userAgentData.mobile) {
-    document.querySelectorAll("*").forEach(elem => {
-      elem.style.curser = "none";
-    });
-  }
-});
-      
+      window.addEventListener("load", (e) => {
+        if (
+          navigator.userAgentData &&
+          navigator.userAgentData.mobile
+        ) {
+          document.querySelectorAll("*").forEach((elem) => {
+            elem.style.cursor = "none";
+          });
+        }
+      });
     </script>
   </body>
 </html>
