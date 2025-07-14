@@ -1,5 +1,4 @@
 {
-  "id": "/",
   "name": "AP Team IDE",
   "short_name": "AP Team IDE",
   "description": "کد ادیتور سبک و قابل حمل",
@@ -8,7 +7,7 @@
   "launch_handler": {
     "client_mode": "auto"
   },
-  "categories": ["utilities" , "social" , "business" , "education" , "development"],
+  "categories": ["utilities", "social", "business", "education", "development"],
   "dir": "rtl",
   "lang": "fa",
   "display": "standalone",
@@ -34,13 +33,13 @@
       "src": "images/IDE-Mobile.png",
       "type": "image/png",
       "sizes": "720x1280",
-      "form_factor": "narrow",
+      "form_factor": "wide",
       "label": "ظاهر اپلیکیشن در موبایل"
     },
     {
       "src": "images/IDE-Desktop.png",
       "type": "image/png",
-      "form_factor": "wide",
+      "form_factor": "narrow",
       "sizes": "1920x1080",
       "label": "ظاهر اپلیکیشن در دسکتاپ"
     }
