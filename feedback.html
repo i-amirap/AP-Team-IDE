@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <link rel="shortcut icon" href="images/icon-192.png" type="image/x-icon" />
     <title>پیشنهادات و انتقادات</title>
     <style>
@@ -101,13 +104,18 @@
         document.getElementById("oEgtMYL").appendChild(script);
 
         // حذف کادر آبی بعد از کلیک روی المنت ها در موبایل
-window.addEventListener("load", (e) => {
-  if (navigator.userAgentData.mobile) {
-    document.querySelectorAll("*").forEach(elem => {
-      elem.style.curser = "none";
-    });
-  }
-});
+        window.addEventListener("load", (e) => {
+          if (navigator.userAgentData.mobile) {
+            document.querySelectorAll("*").forEach((elem) => {
+              elem.style.cursor = "none";
+            });
+          }
+        });
+
+        // جلوگیری از زوم در safari
+        document.addEventListener("gesturestart", function (e) {
+          e.preventDefault();
+        });
       </script>
     </div>
   </body>

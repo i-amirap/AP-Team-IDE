@@ -2,7 +2,10 @@
 <html lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <link rel="shortcut icon" href="images/icon-192.png" type="image/x-icon" />
     <title>زیلینک من - AmirAP</title>
 
@@ -185,9 +188,9 @@
       }
 
       @media (hover: none) and (pointer: coarse) {
-  *:focus {
-    outline: none;
-  }
+        *:focus {
+          outline: none;
+        }
       }
     </style>
   </head>
@@ -208,7 +211,7 @@
 
       <!-- پروفایل -->
       <div class="profile">
-        <img src="icon-192.png" alt="Profile" class="avatar" />
+        <img src="images/icon-192.png" alt="Profile" class="avatar" />
         <h1 class="username">AmirAP</h1>
         <p class="bio">برنامه‌نویس فرانت‌اند 😎</p>
       </div>
@@ -257,6 +260,7 @@
           const a = document.createElement("a");
           a.href = link.url;
           a.target = "_blank";
+          a.rel = "noopener noreferrer";
           const icon = document.createElement("i");
           icon.className = link.icon;
           const text = document.createElement("span");
@@ -293,14 +297,18 @@
       });
 
       // حذف کادر آبی بعد از کلیک روی المنت ها در موبایل
-window.addEventListener("load", (e) => {
-  if (navigator.userAgentData.mobile) {
-    document.querySelectorAll("*").forEach(elem => {
-      elem.style.curser = "none";
-    });
-  }
-});
-      
+      window.addEventListener("load", (e) => {
+        if (navigator.userAgentData && navigator.userAgentData.mobile) {
+          document.querySelectorAll("*").forEach((elem) => {
+            elem.style.cursor = "none";
+          });
+        }
+      });
+
+      // جلوگیری از زوم در safari
+      document.addEventListener("gesturestart", function (e) {
+        e.preventDefault();
+      });
     </script>
   </body>
 </html>

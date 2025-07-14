@@ -3,7 +3,10 @@
   <head>
     <title>AP Team IDE</title>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <meta name="theme-color" content="#007acc" />
     <meta name="msapplication-navbutton-color" content="#007acc" />
     <meta name="apple-mobile-web-app-status-bar-style" content="#007acc" />
@@ -12,9 +15,10 @@
     <meta name="author" content="AP Team" />
     <link rel="shortcut icon" href="images/icon-192.png" type="image/x-icon" />
     <link rel="apple-touch-icon" href="images/icon-192.png" />
-    <link rel="manifest" href="pwa/manifest.json" />
+    <link rel="icon" href="images/icon-192.png" sizes="192x192" />
     <link rel="stylesheet" href="./styles/style.css" />
     <link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css" rel="stylesheet"/>
+    <link rel="manifest" href="manifest.json" />
   </head>
   <body>
     <header>
@@ -24,6 +28,7 @@
         <button class="tab" data-mode="javascript">JavaScript</button>
       </div>
       <div id="controls">
+        <button id="installBtn" style="display:none;">📲 نصب اپلیکیشن</button>
         <button onclick="location.href = 'feedback.html'" id="feedbackBtn" title="ارسال پیشنهادات و انتقادات">پیشنهادات و انتقادات</button>
         <select id="projectSelect" title="انتخاب پروژه">
           <option value="new">پروژه جدید</option>
@@ -64,10 +69,7 @@
     </div>
 
     <!-- SCRIPTS -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.1/ace.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.1/ace.js" crossorigin="anonymous"></script>
     <script src="./js/app.js"></script>
   </body>
 </html>

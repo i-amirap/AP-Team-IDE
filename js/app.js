@@ -300,7 +300,7 @@ window.onload = function () {
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      .register("pwa/sw.js")
+      .register("/AP-Team-IDE/sw.js")
       .then((registration) => {
         console.log("ServiceWorker ثبت شد با موفقیت: ", registration.scope);
       })
@@ -313,7 +313,6 @@ if ("serviceWorker" in navigator) {
 // بررسی وضعیت اینترنت
 window.addEventListener("load", () => {
   if (!navigator.onLine) {
-    // انتقال به صفحه بررسی اتصال
     location.href = "check-connection.html";
   }
 });
@@ -325,10 +324,54 @@ window.addEventListener("offline", () => {
 
 // حذف کادر آبی بعد از کلیک روی المنت ها در موبایل
 window.addEventListener("load", (e) => {
-  if (navigator.userAgentData.mobile) {
-    document.querySelectorAll("*").forEach(elem => {
-      elem.style.curser = "none";
+  if (navigator.userAgentData && navigator.userAgentData.mobile) {
+    document.querySelectorAll("*").forEach((elem) => {
+      elem.style.cursor = "none";
     });
   }
 });
 
+// نمایش پیغام نصب pwa
+let deferredPrompt;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  setTimeout(() => {
+    showInstallPrompt();
+  }, 3000);
+});
+
+function showInstallPrompt() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === "accepted") {
+        console.log("✅ کاربر نصب را تایید کرد");
+      } else {
+        console.log("❌ کاربر نصب را رد کرد");
+      }
+      deferredPrompt = null;
+    });
+  }
+}
+
+// ذخیره داده‌ها در زمان آفلاین بودن (pwa notice)
+if ("serviceWorker" in navigator && "SyncManager" in window) {
+  navigator.serviceWorker.ready
+    .then((registration) => {
+      // ذخیره موقت اطلاعات مثلاً در IndexedDB یا localStorage
+      // saveDataOffline(data); // این تابع را خودت باید بسازی
+
+      // ثبت یک sync
+      registration.sync.register("sync-data");
+    })
+    .catch(console.error);
+}
+
+// جلوگیری از زوم در safari
+document.addEventListener("gesturestart", function (e) {
+  e.preventDefault();
+});
