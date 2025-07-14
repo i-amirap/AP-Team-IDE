@@ -300,7 +300,7 @@ window.onload = function () {
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      .register("pwa/sw.js")
+      .register("./pwa/sw.js")
       .then((registration) => {
         console.log("ServiceWorker ثبت شد با موفقیت: ", registration.scope);
       })
