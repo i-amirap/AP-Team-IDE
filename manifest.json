@@ -1,9 +1,16 @@
 {
+  "id": "/",
   "name": "AP Team IDE",
   "short_name": "AP Team IDE",
   "description": "کد ادیتور سبک و قابل حمل",
   "start_url": "/AP-Team-IDE/index.html",
   "scope": "/AP-Team-IDE/",
+  "launch_handler": {
+    "client_mode": "auto"
+  },
+  "categories": ["utilities" , "social" , "business" , "education" , "development"],
+  "dir": "rtl",
+  "lang": "fa",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#1e1e1e",
