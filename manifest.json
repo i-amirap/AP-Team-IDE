@@ -1,6 +1,6 @@
 {
   "name": "AP Team IDE",
-  "short_name": "AP IDE",
+  "short_name": "AP Team IDE",
   "description": "کد ادیتور سبک و قابل حمل",
   "start_url": "index.html",
   "scope": "./",
