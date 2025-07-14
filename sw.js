@@ -9,6 +9,7 @@ const urlsToCache = [
   "/images/icon-192.png",
   "/images/icon-512.png",
   "/images/IDE-Mobile.png",
+  "/images/IDE-Desktop.png",
   "/styles/style.css",
   "/js/app.js",
   "/sw.js",
