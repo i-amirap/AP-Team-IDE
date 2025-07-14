@@ -64,7 +64,7 @@
             cache: "no-store",
             mode: "no-cors",
           });
-          // به دلیل mode: 'no-cors'، res.ok ممکن نیست، پس فرض می‌گیریم اینترنت وصله
+          // به دلیل mode: 'no-cors'، res.ok قابل بررسی نیست، پس فرض می‌گیریم اینترنت وصل است
           location.href = "index.html";
         } catch (e) {
           showOffline();
@@ -79,15 +79,17 @@
 
       checkConnection();
 
-      
-// حذف کادر آبی بعد از کلیک روی المنت ها در موبایل
-window.addEventListener("load", (e) => {
-  if (navigator.userAgentData.mobile) {
-    document.querySelectorAll("*").forEach(elem => {
-      elem.style.curser = "none";
-    });
-  }
-});
+      // حذف کادر آبی بعد از کلیک روی المنت ها در موبایل
+      window.addEventListener("load", (e) => {
+        if (
+          navigator.userAgentData &&
+          navigator.userAgentData.mobile
+        ) {
+          document.querySelectorAll("*").forEach((elem) => {
+            elem.style.cursor = "none";
+          });
+        }
+      });
     </script>
   </body>
 </html>
