@@ -22,10 +22,11 @@
   ],
   "screenshots": [
     {
-      "src": "images/IDE-ScreenShot.png",
+      "src": "images/IDE-Mobile.png",
       "type": "image/png",
       "sizes": "720x1280",
-      "form_factor": "wide"
+      "form_factor": "wide",
+      "label": "ظاهر اپلیکیشن در موبایل"
     }
   ]
 }
