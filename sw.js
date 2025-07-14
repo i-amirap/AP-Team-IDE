@@ -57,29 +57,31 @@ self.addEventListener("fetch", event => {
   );
 });
 
-// همگام‌سازی داده‌ها در پس‌زمینه (Background Sync)
-self.addEventListener('sync', (event) => {
-  if (event.tag === 'sync-data') {
-    event.waitUntil(syncUserData());
-  }
-});
 
-async function syncUserData() {
-  // این بخش باید خودت بر اساس پروژه کامل کنی
-  const data = await getPendingDataFromIndexedDB();
 
-  for (let item of data) {
-    try {
-      await fetch('/api/save', {
-        method: 'POST',
-        body: JSON.stringify(item),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      await markAsSyncedInDB(item.id);
-    } catch (err) {
-      console.error('Sync failed:', err);
-    }
-  }
-}
+// // همگام‌سازی داده‌ها در پس‌زمینه (Background Sync)
+// self.addEventListener('sync', (event) => {
+//   if (event.tag === 'sync-data') {
+//     event.waitUntil(syncUserData());
+//   }
+// });
+
+// async function syncUserData() {
+//   // این بخش باید خودت بر اساس پروژه کامل کنی
+//   const data = await getPendingDataFromIndexedDB();
+
+//   for (let item of data) {
+//     try {
+//       await fetch('/api/save', {
+//         method: 'POST',
+//         body: JSON.stringify(item),
+//         headers: {
+//           'Content-Type': 'application/json'
+//         }
+//       });
+//       await markAsSyncedInDB(item.id);
+//     } catch (err) {
+//       console.error('Sync failed:', err);
+//     }
+//   }
+// }
