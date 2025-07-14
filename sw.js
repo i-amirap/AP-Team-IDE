@@ -14,7 +14,6 @@ const urlsToCache = [
   "/js/app.js",
   "/sw.js",
   "/styles/fonts/vazir.woff2"
-  // آدرس CDN حذف شد
 ];
 
 // نصب و کش کردن فایل‌ها
@@ -50,7 +49,7 @@ self.addEventListener("fetch", event => {
           return new Response("آفلاین هستید و فایل در کش موجود نیست.", {
             status: 503,
             statusText: "Service Unavailable",
-            headers: new Headers({ "Content-Type": "text/plain" }),
+            headers: new Headers({ "Content-Type": "text/plain; charset=utf-8" }),
           });
         })
       );
@@ -59,28 +58,28 @@ self.addEventListener("fetch", event => {
 });
 
 // ذخیره داده‌ها در زمان آفلاین بودن (Background Sync)
-self.addEventListener('sync', (event) => {
+self.addEventListener('sync', event => {
   if (event.tag === 'sync-data') {
     event.waitUntil(syncUserData());
   }
 });
 
 async function syncUserData() {
-  // فرض مثال: داده‌ها در IndexedDB ذخیره شدن
-  const data = await getPendingDataFromIndexedDB();
+  // فرض مثال: داده‌ها در IndexedDB ذخیره شدن و توابع زیر باید خودتان پیاده‌سازی کنید
+  if (!self.indexedDB) return;
 
-  for (let item of data) {
-    try {
+  try {
+    const data = await getPendingDataFromIndexedDB();
+
+    for (const item of data) {
       await fetch('/api/save', {
         method: 'POST',
         body: JSON.stringify(item),
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' }
       });
       await markAsSyncedInDB(item.id);
-    } catch (err) {
-      console.error('Sync failed:', err);
     }
+  } catch (err) {
+    console.error('Sync failed:', err);
   }
 }
