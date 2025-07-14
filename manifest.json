@@ -4,9 +4,6 @@
   "description": "کد ادیتور سبک و قابل حمل",
   "start_url": "/AP-Team-IDE/index.html",
   "scope": "/AP-Team-IDE/",
-  "launch_handler": {
-    "client_mode": "auto"
-  },
   "categories": ["utilities", "social", "business", "education", "development"],
   "dir": "rtl",
   "lang": "fa",
@@ -19,6 +16,12 @@
       "src": "images/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icon-192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
       "purpose": "maskable"
     },
     {
@@ -26,6 +29,12 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
+    },
+    {
+      "src": "images/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "screenshots": [
