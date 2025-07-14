@@ -298,20 +298,27 @@
 
       // حذف کادر آبی بعد از کلیک روی المنت ها در موبایل
       window.addEventListener("load", (e) => {
-        if (
-          navigator.userAgentData &&
-          navigator.userAgentData.mobile
-        ) {
+        if (navigator.userAgentData && navigator.userAgentData.mobile) {
           document.querySelectorAll("*").forEach((elem) => {
             elem.style.cursor = "none";
           });
         }
       });
 
-       // جلوگیری از زوم در safari
-        document.addEventListener("gesturestart", function (e) {
-          e.preventDefault();
-        });
+      // جلوگیری از زوم در safari
+      document.addEventListener("gesturestart", function (e) {
+        e.preventDefault();
+      });
+
+      // بررسی آنلاین بودن
+      window.addEventListener("load", () => {
+        if (!navigator.onLine) {
+          location.href = "check-connection.html";
+        }
+      });
+      window.addEventListener("offline", () => {
+        location.href = "check-connection.html";
+      });
     </script>
   </body>
 </html>
