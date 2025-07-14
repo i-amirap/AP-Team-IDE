@@ -327,7 +327,7 @@ window.addEventListener("offline", () => {
 window.addEventListener("load", (e) => {
   if (navigator.userAgentData.mobile) {
     document.querySelectorAll("*").forEach((elem) => {
-      elem.style.curser = "none !important";
+      elem.style.cursor = "none !important";
     });
   }
 });
@@ -360,4 +360,16 @@ function showInstallPrompt() {
       deferredPrompt = null;
     });
   }
+}
+
+
+//ذخیره داده ها در زمان آفلاین بودن (pwa notice)
+if ('serviceWorker' in navigator && 'SyncManager' in window) {
+  navigator.serviceWorker.ready.then(registration => {
+    // ذخیره موقت اطلاعات مثلاً در IndexedDB یا localStorage
+    saveDataOffline(data);
+
+    // ثبت یک sync
+    registration.sync.register('sync-data');
+  }).catch(console.error);
 }
