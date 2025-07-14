@@ -1,4 +1,4 @@
-const CACHE_NAME = "AP Team-IDE-cache-v1.0";
+const CACHE_NAME = "AP-Team-IDE-cache-v1.0";
 const urlsToCache = [
   "/",
   "/index.html",
@@ -13,8 +13,8 @@ const urlsToCache = [
   "/styles/style.css",
   "/js/app.js",
   "/sw.js",
-  "/styles/fonts/vazir.woff2",
-  "https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.1/ace.js"
+  "/styles/fonts/vazir.woff2"
+  // آدرس CDN حذف شد
 ];
 
 // نصب و کش کردن فایل‌ها
@@ -35,19 +35,52 @@ self.addEventListener("activate", event => {
   );
 });
 
-// مدیریت درخواست‌ها
+// مدیریت درخواست‌ها با fallback مناسب
 self.addEventListener("fetch", event => {
   event.respondWith(
     caches.match(event.request).then(response => {
       return (
         response ||
         fetch(event.request).catch(() => {
-          // اگر درخواست HTML بود و اینترنت قطع بود، به صفحه check-connection.html هدایت کن
           if (event.request.headers.get("accept")?.includes("text/html")) {
+            // هنگام آفلاین بودن و درخواست HTML، صفحه چک اتصال نشان داده شود
             return caches.match("/check-connection.html");
           }
+          // fallback برای فایل‌های غیر HTML
+          return new Response("آفلاین هستید و فایل در کش موجود نیست.", {
+            status: 503,
+            statusText: "Service Unavailable",
+            headers: new Headers({ "Content-Type": "text/plain" }),
+          });
         })
       );
     })
   );
 });
+
+// ذخیره داده‌ها در زمان آفلاین بودن (Background Sync)
+self.addEventListener('sync', (event) => {
+  if (event.tag === 'sync-data') {
+    event.waitUntil(syncUserData());
+  }
+});
+
+async function syncUserData() {
+  // فرض مثال: داده‌ها در IndexedDB ذخیره شدن
+  const data = await getPendingDataFromIndexedDB();
+
+  for (let item of data) {
+    try {
+      await fetch('/api/save', {
+        method: 'POST',
+        body: JSON.stringify(item),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      await markAsSyncedInDB(item.id);
+    } catch (err) {
+      console.error('Sync failed:', err);
+    }
+  }
+}
