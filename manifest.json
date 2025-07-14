@@ -1,9 +1,11 @@
 {
   "name": "AP Team IDE",
-  "short_name": "AP Team IDE",
+  "short_name": "AP IDE",
   "description": "کد ادیتور سبک و قابل حمل",
-  "start_url": ".",
+  "start_url": "index.html",
+  "scope": "./",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#1e1e1e",
   "theme_color": "#007acc",
   "icons": [
