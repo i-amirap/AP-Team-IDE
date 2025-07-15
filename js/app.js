@@ -309,11 +309,12 @@ window.addEventListener("load", () => {
 
 // نصب PWA
 let deferredPrompt;
+let installTimeOut;
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
   document.addEventListener("click" , () => {
-    setTimeout(() => {
+    installTimeOut = setTimeout(() => {
       showInstallPrompt();
     }, 2000);
   })
@@ -322,11 +323,13 @@ function showInstallPrompt() {
   if (deferredPrompt) {
     deferredPrompt.prompt();
     deferredPrompt.userChoice.then((choice) => {
-      console.log(
-        choice.outcome === "accepted"
-          ? "✅ کاربر نصب را تایید کرد"
-          : "❌ کاربر نصب را رد کرد"
-      );
+        if (choice.outcome === "accepted") {
+           clearTimeout(installTimeOut);
+           console.log("✅ کاربر نصب را تایید کرد");
+        }else {
+         console.log("❌ کاربر نصب را رد کرد");
+         clearTimeout(installTimeOut);
+        }
       deferredPrompt = null;
     });
   }
