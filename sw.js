@@ -36,52 +36,33 @@ self.addEventListener("activate", event => {
   );
 });
 
-// مدیریت درخواست‌ها و fallback
+// مدیریت درخواست‌ها و fallback با پشتیبانی از کوئری در URL
 self.addEventListener("fetch", event => {
-  event.respondWith(
-    caches.match(event.request).then(response => {
-      return (
-        response ||
-        fetch(event.request).catch(() => {
-          if (event.request.headers.get("accept")?.includes("text/html")) {
-            return caches.match("/check-connection.html");
-          }
-          return new Response("آفلاین هستید و فایل در کش موجود نیست.", {
-            status: 503,
-            statusText: "Service Unavailable",
-            headers: new Headers({ "Content-Type": "text/plain" }),
-          });
-        })
-      );
-    })
-  );
+  if (event.request.mode === "navigate") {
+    // وقتی صفحه بارگذاری می‌شود (حتی با کوئری)، index.html را برگردان
+    event.respondWith(
+      caches.match("/AP-Team-IDE/index.html").then(response => {
+        return response || fetch(event.request);
+      })
+    );
+  } else {
+    // برای بقیه درخواست‌ها ابتدا کش، سپس شبکه
+    event.respondWith(
+      caches.match(event.request).then(response => {
+        return (
+          response ||
+          fetch(event.request).catch(() => {
+            if (event.request.headers.get("accept")?.includes("text/html")) {
+              return caches.match("/AP-Team-IDE/check-connection.html");
+            }
+            return new Response("آفلاین هستید و فایل در کش موجود نیست.", {
+              status: 503,
+              statusText: "Service Unavailable",
+              headers: new Headers({ "Content-Type": "text/plain" }),
+            });
+          })
+        );
+      })
+    );
+  }
 });
-
-
-
-// // همگام‌سازی داده‌ها در پس‌زمینه (Background Sync)
-// self.addEventListener('sync', (event) => {
-//   if (event.tag === 'sync-data') {
-//     event.waitUntil(syncUserData());
-//   }
-// });
-
-// async function syncUserData() {
-//   // این بخش باید خودت بر اساس پروژه کامل کنی
-//   const data = await getPendingDataFromIndexedDB();
-
-//   for (let item of data) {
-//     try {
-//       await fetch('/api/save', {
-//         method: 'POST',
-//         body: JSON.stringify(item),
-//         headers: {
-//           'Content-Type': 'application/json'
-//         }
-//       });
-//       await markAsSyncedInDB(item.id);
-//     } catch (err) {
-//       console.error('Sync failed:', err);
-//     }
-//   }
-// }
