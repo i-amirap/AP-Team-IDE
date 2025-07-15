@@ -15,40 +15,44 @@ const urlsToCache = [
   "/AP-Team-IDE/styles/style.css",
   "/AP-Team-IDE/js/app.js",
   "/AP-Team-IDE/sw.js",
-  "/AP-Team-IDE/styles/fonts/vazir.woff2"
+  "/AP-Team-IDE/styles/fonts/vazir.woff2",
 ];
 
 // نصب و کش کردن فایل‌ها
-self.addEventListener("install", event => {
+self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
   );
 });
 
 // فعال‌سازی و حذف کش‌های قدیمی
-self.addEventListener("activate", event => {
+self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
+    caches
+      .keys()
+      .then((keys) =>
+        Promise.all(
+          keys
+            .filter((key) => key !== CACHE_NAME)
+            .map((key) => caches.delete(key))
+        )
       )
-    )
   );
 });
 
 // مدیریت درخواست‌ها و fallback با پشتیبانی از کوئری در URL
-self.addEventListener("fetch", event => {
+self.addEventListener("fetch", (event) => {
   if (event.request.mode === "navigate") {
     // وقتی صفحه بارگذاری می‌شود (حتی با کوئری)، index.html را برگردان
     event.respondWith(
-      caches.match("/AP-Team-IDE/index.html").then(response => {
+      caches.match("/AP-Team-IDE/index.html").then((response) => {
         return response || fetch(event.request);
       })
     );
   } else {
     // برای بقیه درخواست‌ها ابتدا کش، سپس شبکه
     event.respondWith(
-      caches.match(event.request).then(response => {
+      caches.match(event.request).then((response) => {
         return (
           response ||
           fetch(event.request).catch(() => {
