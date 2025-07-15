@@ -13,6 +13,8 @@ html {
   font-family: "Vazir", sans-serif;
   background: #1e1e1e;
   color: white;
+  -webkit-user-select: none !important;
+  user-select: none !important;
 }
 
 button,
