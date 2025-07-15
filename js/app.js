@@ -308,35 +308,33 @@ window.addEventListener("load", () => {
 });
 
 // نصب PWA
-let deferredPrompt = null;
-let installShown = false; // جلوگیری از نمایش چندباره
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault(); // جلوگیری از نمایش پیش‌فرض مرورگر
+let deferredPrompt;
+let showInstall = true;
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
   deferredPrompt = e;
-  console.log('beforeinstallprompt ذخیره شد');
-
-  // دکمه رو فعال کن (مثلاً نمایش بده)
-  const installBtn = document.getElementById('install-btn');
-  installBtn.style.display = 'inline-flex';
+  document.addEventListener("click" , () => {
+    if (showInstall) {
+      setTimeout(() => {
+        showInstallPrompt();
+      }, 2000);
+    }
+  })
 });
-
-document.getElementById('install-btn').addEventListener('click', async () => {
-  if (!deferredPrompt || installShown) return;
-
-  deferredPrompt.prompt();
-  const result = await deferredPrompt.userChoice;
-
-  if (result.outcome === 'accepted') {
-    console.log('PWA نصب شد');
-  } else {
-    console.log('کاربر نصب رو رد کرد');
-    // برای اینکه دوباره نشون داده نشه:
-    installShown = true;
+function showInstallPrompt() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choice) => {
+      console.log(
+        choice.outcome === "accepted"
+          ? "✅ کاربر نصب را تایید کرد"
+          : "❌ کاربر نصب را رد کرد"
+      );
+      showInstall = false;
+      deferredPrompt = null;
+    });
   }
-
-  deferredPrompt = null;
-});
+}
 
 // بک‌گراند Sync
 if ("serviceWorker" in navigator && "SyncManager" in window) {
