@@ -57,7 +57,7 @@ self.addEventListener("fetch", (event) => {
           response ||
           fetch(event.request).catch(() => {
             if (event.request.headers.get("accept")?.includes("text/html")) {
-              return caches.match("/AP-Team-IDE/check-connection.html");
+              return caches.match("check-connection.html");
             }
             return new Response("آفلاین هستید و فایل در کش موجود نیست.", {
               status: 503,
