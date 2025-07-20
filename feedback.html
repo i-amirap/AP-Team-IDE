@@ -54,7 +54,7 @@
   <body>
     <!-- دکمه برگشت -->
     <a style="z-index: 999999" href="index.html" class="back-btn">
-      <span>بازگشت به صفحه اصلی</span>
+      <span dir="rtl">بازگشت (esc)</span>
     </a>
 
     <div
@@ -125,6 +125,11 @@
         });
         window.addEventListener("offline", () => {
           location.href = "check-connection.html";
+        });
+
+        //بازگشت با میانبر
+        window.addEventListener("keyup", (e) => {
+          e.keyCode === 27 ? document.querySelector(".back-btn").click() : null;
         });
       </script>
     </div>
