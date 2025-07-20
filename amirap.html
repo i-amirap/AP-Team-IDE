@@ -199,7 +199,7 @@
     <!-- دکمه برگشت -->
     <a href="index.html" class="back-btn">
       <i class="fas fa-arrow-right"></i>
-      <span>صفحه اصلی</span>
+      <span>بازگشت (esc)</span>
     </a>
 
     <div class="container">
@@ -319,6 +319,11 @@
       });
       window.addEventListener("offline", () => {
         location.href = "check-connection.html";
+      });
+
+      //بازگشت با میانبر
+      window.addEventListener("keyup", (e) => {
+        e.keyCode === 27 ? document.querySelector(".back-btn").click() : null;
       });
     </script>
   </body>
