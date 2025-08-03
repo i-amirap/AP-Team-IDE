@@ -376,3 +376,5 @@ async function newVersion() {
     location.replace("https://ide.apteam.ir");
   }
 }
+
+newVersion();
