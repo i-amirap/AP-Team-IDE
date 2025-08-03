@@ -345,3 +345,34 @@ if ("serviceWorker" in navigator && "SyncManager" in window) {
     })
     .catch(console.error);
 }
+
+async function swConfirm(
+  title,
+  text = "",
+  confirmText = "بله",
+  cancelText = "خیر"
+) {
+  const result = await Swal.fire({
+    title,
+    text,
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: confirmText,
+    cancelButtonText: cancelText,
+    customClass: {
+      popup: "my-popup",
+      confirmButton: "my-confirm",
+      cancelButton: "my-cancel",
+      container: "my-container",
+      actions: "my-actions",
+    },
+  });
+
+  return result.isConfirmed;
+}
+
+async function newVersion() {
+  if (await swConfirm("آیا میخواهید از نسخه نهایی بازدید کنید؟" , "این نسحه آزمایشی است، برای دیدن نسخه نهایی تایید کنید")) {
+    location.replace("https://ide.apteam.ir");
+  }
+}
